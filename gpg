@@ -1,0 +1,16 @@
+apt install gnupg
+
+### 키 페어 생성 비밀키 사용자 ###
+gpg --gen-key
+gpg --export ythwork@naver.com > ~/ythwork.gpgpubkey
+
+
+### 공개키 이용자 ###
+gpg --import ythwork.gpgpubkey
+gpg --encrypt --recipient ythwork@naver.com secret.html
+
+
+
+### 비밀키 사용자 ###
+gpg --decrypt ~/secret.html.gpg > secret.html
+
