@@ -5,3 +5,5 @@ lsof /path/to/file
 
 sudo lsof -i :3006
 
+sudo lsof -p 1019 -P | grep LISTEN
+

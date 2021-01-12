@@ -1,0 +1,22 @@
+sudo apt fail2ban
+
+sudo vim /etc/fail2ban/jail.local
+
+[DEFAULT]
+bantime = 86400 # 얼마 동안 차단할지
+ignoreip = 127.0.0.1/8 192.168.1.0/24
+
+
+# add a filter  
+/etc/fail2ban/filter.d/sshd.conf
+
+failregex = ....
+	   ^%(__prefix_line)sConnection closed by <HOST> \[preauth\]$
+
+
+### fail2ban check ###
+sudo fail2ban-client status ssh or sudo fail2ban-client status sshd
+
+
+
+

@@ -1,0 +1,7 @@
+
+apt install nethogs
+sudo nethogs
+
+apt install iftop
+sudo iftop
+

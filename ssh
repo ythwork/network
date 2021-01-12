@@ -1,25 +1,68 @@
 
-# tunnel
+### tunnel from local to remote ###
+# 터널을 만든다.
 ssh yangtaehwan@192.168.2.20 
 	-L 50022:192.168.4.40:22
 
-192.168.2.20 : proxy server
+192.168.2.20 : 중간 서버 (도착지)
 -L : local
-50022 : tunnel input port
-192.168.4.40:22 : tunnel output address and port
+50022 : 로컬 포트 
+192.168.4.40:22 : 리모트쪽 네트워크 IP:포트, 터널을 나와서 향할 곳 
 
 
-then scp
+# 터널이 완성된 후 scp로 로컬의 파일을 리모트의 /tmp/에 전송 
 scp -P 50022 FILE-PATH REMOTE-USER@localhost:/tmp/
 
 
 
 
-
-# connect service in middle-server
+### connect service in middle-server ###
 ssh yangtaehwan@middle-server
 	-L 50022:localhost:8000
 
 localhost : middle-server
+
+
+
+
+### tunnel from remote to local ###
+# 터널을 만든다.
+ssh yangtaehwan@192.168.3.30
+	-R 50022:192.168.5.50:22
+
+192.168.3.30: 중간서버(출발지)
+-R : remote
+50022 : 중간 서버 포트 
+192.168.5.50:22 : 로컬쪽 네트워크 IP:포트          
+
+
+# 중간 서버에 누군가가 접속해서 
+ssh 192.168.3.30
+
+# 입구 포트에 접속한다.
+ssh -p 50022 someone@localhost
+
+
+
+
+### ssh security ###
+sudo vim /etc/ssh/sshd_config
+
+PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+
+RSAAuthentication yes
+PubkeyAuthentication yes
+
+
+
+
+### authentication log ###
+/var/log/auth.log
+zgrep : 압축되었거나 안된 파일도 모두 읽을 수 있다.
+
+
+
 
 
