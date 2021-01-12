@@ -5,4 +5,3 @@ lsof /path/to/file
 
 sudo lsof -i :3006
 
-sudo lsof -i4 TCP@192.168.1.25:3000
