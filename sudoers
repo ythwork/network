@@ -1,0 +1,10 @@
+sudo visudo
+
+root ALL=(ALL:ALL) ALL
+%sudo ALL=(ALL:ALL) ALL
+
+{권한을 설정할 사용자 or 그룹명}  
+{어떤 서버에 내용이 반영될지}=({sudo -u로 대신할 사용자}:{sudo -g로 대신할 그룹}) 
+{어떤 조작을 허가할지}
+
+greg ALL=(ALL#누구라도 될 수 있음#) /bin/systemctl restart mysql
