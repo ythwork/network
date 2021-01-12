@@ -1,0 +1,25 @@
+
+# tunnel
+ssh yangtaehwan@192.168.2.20 
+	-L 50022:192.168.4.40:22
+
+192.168.2.20 : proxy server
+-L : local
+50022 : tunnel input port
+192.168.4.40:22 : tunnel output address and port
+
+
+then scp
+scp -P 50022 FILE-PATH REMOTE-USER@localhost:/tmp/
+
+
+
+
+
+# connect service in middle-server
+ssh yangtaehwan@middle-server
+	-L 50022:localhost:8000
+
+localhost : middle-server
+
+

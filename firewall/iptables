@@ -1,0 +1,23 @@
+
+iptables --table filter --flush
+
+# 기본 정책 수립 
+iptables --policy INPUT DROP
+iptables --policy FORWARD ACCEPT
+iptables --policy OUTPUT ACCEPT
+
+# 22, 80 port
+iptables --append INPUT --protocol tcp --match state --state NEW --dport 22 --jump ACCEPT
+iptables --append INPUT --protocol tcp --match state --state NEW --dport 80 --jump ACCEPT
+
+# loopback
+iptables --append INPUT --in-interface lo --jump ACCEPT
+
+iptables --append INPUT --match state --state ESTABLISHED, RELATED --jump ACCEPT
+
+# icmp
+iptables --append INPUT --protocol icmp --jump ACCEPT
+
+# 설정 저장 
+service iptables save
+

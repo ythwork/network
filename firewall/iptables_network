@@ -1,0 +1,16 @@
+iptables --table filter --flush
+iptables --policy INPUT DROP
+iptables --policy FORWARD ACCEPT
+iptables --policy OUTPUT ACCEPT
+
+
+iptables --append INPUT --protocol tcp --match state --state NEW  
+	--source 192.168.1.0/24 --dport 80 --jump ACCEPT
+
+
+iptables --append INPUT --in-interface lo --jump ACCEPT
+iptables --append INPUT --match state --state ESTABLISHED, RELATED 
+	--jump ACCEPT
+iptables --append INPUT --protocol icmp --jump ACCEPT
+service iptables save
+
